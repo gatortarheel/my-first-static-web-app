@@ -3,6 +3,7 @@
     <h1>Employees</h1>
 
     <employee-table />
+    {{ message }}
   </div>
 </template>
 
@@ -11,6 +12,15 @@
 
   export default {
     name: 'app',
+    data() {
+    return {
+      message: ""
+    };
+  },
+  async mounted() {
+    const { text } = await (await fetch("/api/message")).json();
+    this.message = text;
+  },
     components: {
       EmployeeTable,
     },
